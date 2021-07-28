@@ -55,7 +55,7 @@ Projeto visa construir uma API Rest com Node.js, Express, Sequelize e MySQL.
 
 - No terminal do MySQL (apenas para teste):
 
-`insert into Pessoas (nome, ativo, email, role, createdAt, updatedAt) values ("Samanta Fluture", 1, "samantafluture@gmail.com", "estudante", NOW(), NOW());``
+`insert into Pessoas (nome, ativo, email, role, createdAt, updatedAt) values ("João Silva", 1, "email@gmail.com", "estudante", NOW(), NOW());`
 
 `select * from Pessoas;`
 
