@@ -161,7 +161,37 @@
 
 `const novaPessoaCriada = await database.Pessoas.create(novaPessoa);`
 
+### Exemplo: Método PUT
 
+- Vamos atualizar um registro usando o parâmetro Id
+- E as novas infos serão passadas no corpo da requisição
+
+`const { id } = req.params;`
+`const novasInfos = req.body;``
+
+- Primeiro, atualiza com o método update() do sequelize
+
+`await database.Pessoas.update(novasInfos, {where: { id: Number(id) }});`
+
+- Depois, retorna o registro atualizado
+
+`const pessoaAtualizada = await database.Pessoas.findOne({where: { id: Number(id) }});`
+
+`res.status(200).json(pessoaAtualizada);`
+
+### Exemplo: Método DELETE
+
+- Vamos deletar um registro a partir de seu id, passado via parâmetro
+
+`const { id } = req.params;`
+
+- Usar o método destroy() do sequelize, pegando o id
+
+`await database.Pessoas.destroy({where: { id: Number(id) }});`
+
+- Retornar uma mensagem de que o registro do id x foi deletado
+
+`return res.status(200).json({ mensagem: `id ${id} deletado` });`
 
 ## Routes
 
