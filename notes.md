@@ -115,7 +115,7 @@
 - Como ligar o modelo ao restante da aplicação?
 - Via Controller, fazendo um intermédio, para que o Modelo não fique totalmente acoplado e acessível ao restante da aplicação
 
-### Controller
+## Controller
 
 - Criar pasta /controllers dentro de /api
 - Criar o primeiro controller: PessoaControler.js (em maísculo porque será uma classe)
@@ -123,12 +123,7 @@
 - Métodos que vão na classe (get, create, delete, update)
 - Os métodos tem (req, res) pois recebem requisição e devolvem uma resposta
 
-### Routes
-
-- Criar arquivo index.js dentro da pasta /routes dentro de /api
-- Será o ponto de entrada das rotas
-
-#### Exemplo: Método GET 
+### Exemplo: Método GET 
 
 `const todasAsPessoas = await database.Pessoas.findAll();`
 
@@ -142,4 +137,45 @@
 - Retorna a resposta da requisição (todasAsPessoas)
 - Com status 200 = ok
 - Convertida no formato json
+
+### Exemplo: Método GET by ID
+
+- Vamos pegar uma pessoa a partir de seu id, que será passado pelo usuário via parâmetros
+
+`const { id } = req.params;``
+
+- Usar o método findOne() do Sequelize
+- Especificando o parâmetro "where" em um objeto
+- E dentro dele, o id (como number)
+- Onde o number é o próprio id
+
+`const umaPessoa = await database.Pessoas.findOne({ where: { id: Number(id) } });`
+
+### Exemplo: Método POST
+
+- Vamos passar um conteúdo no corpo da requisição
+
+`const novaPessoa = req.body;`
+
+- Usar o método create() do Sequelize, passando essa const acima, ou seja, o body da requisição
+
+`const novaPessoaCriada = await database.Pessoas.create(novaPessoa);`
+
+
+
+## Routes
+
+- Criar arquivo index.js dentro da pasta /routes dentro de /api
+- Será o ponto de entrada das rotas
+- Depois de criar os métodos nos controllers, avisar o controller das rotas criadas
+
+### Exemplo de route
+
+`router.get("/pessoas", PessoaController.pegaTodasAsPessoas);`
+
+- Disponibilizei os métodos do controller Pessoas
+- Deste estou usando o método GET = pegaTodasAsPessoas
+- Quando eu acessar este endpoint, executa
+- Como o método é static, não preciso instanciar uma PessoaController
+- Para colocar parâmetro (id por exemplo) no endpoint, indicar ele com : (:id)
 
