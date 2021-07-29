@@ -32,6 +32,8 @@
     - alterações incrementais e rastreáveis no banco
     - poder rastrear as alterações feitas (tipo git)
     - coordenar, rastrear e reverter alterações caso precise
+- podemos executar caso precisem adicionar um nova atributo na tabela
+- ou se criamos novas tabelas em nossa database
 
 ### Comandos para criação e conexão
 
@@ -53,6 +55,50 @@
 `npx sequelize-cli model:create --name Pessoas --attributes nome:string,ativo:boolean,email:string,role:string`
 
 - vai gerar os arquivos de models e de migrations do modelo Pessoas
+
+### Quais tabelas/modelos criar primeiro? 
+
+- criar primeiro os modelos de tabelas que não usam chave-estrangeira
+- quando criamos uma tabela, não criar atributos que são chaves-estrangeiras (dado importado de outras tabelas)
+- apenas os atributos que são naturais desta própria tabela
+
+### Chaves-estrangeiras & Associações entre tabelas
+
+- as associações são feitas nos modelos
+- e usam métodos do próprio sequelize para oneToMany, ManyToOne, ManyToMany
+
+`Pessoas.hasMany(models.Turmas);`
+
+- Exemplo: a tabela pessoas tem uma relação de uma para várias Turmas
+- Pois dentro da tabela Turmas, tem o docent_id como chave-estrangeira
+- Ou seja, um professor pode ter várias turmas!
+
+* caso você não passe uma chave-estrangeira, o padrão do ORM é adicionar na tabela "many/b" uma chave id da tabela "one/a"
+* exemplo: a tabela turma ganharia um PessoaId (no singular, vindo da tabela Pessoas)
+
+- Ou podemos passar exatamente o nome que queremos para a foreignKey
+- Em seguida, fazer o outro lado da história, falando que o "many" pertence ao "one"
+
+`Turmas.belongsTo(models.Pessoas);`
+
+- Depois, nos arquivos seeders, avisar onde que as chaves-estrangeiras vão ficar
+- Adicioanr as colunas que vão receber estas chaves
+- Além de acrescentar a coluna, também referenciar de onde a chave vai vir
+
+`references: { model: "Pessoas", key: "id" }`
+
+### Rodar migrações depois que tiver alterações
+
+`npx sequelize-cli db:migrate`
+
+- Ir para o terminal MySQL:
+
+`show tables;`
+
+`describe Matriculas;`
+`describe Turmas;`
+`describe Niveis;`
+`describe Pessoas;`
 
 ## Arquivos criados
 
