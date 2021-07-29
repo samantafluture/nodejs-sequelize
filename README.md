@@ -11,6 +11,10 @@ Projeto visa construir uma API Rest com Node.js, Express, Sequelize e MySQL.
 - MySQL
 - Postman
 - Nodemon
+    
+## Modelos e associações
+
+![Diagrama das tabelas da API](https://github.com/samantafluture/nodejs-sequelize/blob/main/diagrama.png?raw=true)
 
 ## O que instalar?
 
