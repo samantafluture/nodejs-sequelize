@@ -144,6 +144,16 @@
 
 * passando o name de arquivod e seed
 * vai criar uma nova semente dentro da pasta seeders com data de criação no nome do arquivo
+* criar sempre os seeders em ordem de uso
+* os que usam mais chave-estrangeira por último
+
+`npx sequelize-cli seed:generate --name demo-nivel`
+`npx sequelize-cli seed:generate --name demo-turmas`
+`npx sequelize-cli seed:generate --name demo-matriculas`
+
+- Depois, fazer o seed:
+
+`npx sequelize-cli db:seed:all`
 
 ### Seeders
 
@@ -155,6 +165,9 @@
 - Voltar para o terminal MySQL e ver se populou:
 
 `select * from Pessoas;`
+`select * from Niveis;`
+`select * from Turmas;`
+`select * from Matriculas;`
 
 ## Padrão MVC
 
