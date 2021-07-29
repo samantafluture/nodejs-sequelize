@@ -11,7 +11,7 @@ Projeto visa construir uma API Rest com Node.js, Express, Sequelize e MySQL.
 - MySQL
 - Postman
 - Nodemon
-    
+
 ## Modelos e associações
 
 ![Diagrama das tabelas da API](https://github.com/samantafluture/nodejs-sequelize/blob/main/diagrama.png?raw=true)
@@ -83,6 +83,8 @@ Projeto visa construir uma API Rest com Node.js, Express, Sequelize e MySQL.
 
 ### Métodos
 
+Foram criados os seguintes métodos HTTP para cada modelo.
+
 - GET
 - PUT
 - POST
@@ -90,7 +92,7 @@ Projeto visa construir uma API Rest com Node.js, Express, Sequelize e MySQL.
 
 ### Rotas
 
-* Acesse via localhost:3000
+Acesse via localhost:3000 as rotas abaixo.
 
 - [/pessoas](http://localhost:3000/pessoas)
 - [/niveis](http://localhost:3000/niveis)
