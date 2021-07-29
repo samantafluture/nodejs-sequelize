@@ -268,3 +268,28 @@
 - Como o método é static, não preciso instanciar uma PessoaController
 - Para colocar parâmetro (id por exemplo) no endpoint, indicar ele com : (:id)
 
+## Endpoints que só existem na associaçào
+
+- Exemplo: a matrícula só existe se houver outros fatores que são dados de chaves-estrangeiras
+- Esse endpoint `/matriculas/` solto não faz muito sentido pro sistema sem estar relacionado com alguma outra tabela
+- Faz mais sentido receber, por exemplo: `/pessoas/1/matriculas/`, ou seja, mostrando todas as matrículas da pessoa de id 1
+- Em vez de estar solta, sem estar relacionada à nenhum usuário do sistema
+- Por conta disso, não vamos criar um controlador e rota próprios para matrícula
+- E sim fazer dentro do controlador de pessoas
+- Ou seja, as matrículas vão estar sempre vinculadas às pessoas
+
+### Exemplo de rota associada
+
+- Rota que desejamos é associada a uma pessoa
+- Exemplo: /pessoas/1/matricula/5
+- Seria: /pessoas/:estudanteId/matricula/:matriculaId
+- Primeiro, fala quais parâmetros quer pegar, guardando nome da const
+
+`const { estudanteId, matriculaId } = req.params;`
+
+- Depois, dentro do try (try catch), especifica o que são cada um destes parâmetros
+- Os nomes tem que ser os mesmos dos das colunas que queremos pegar na tabela associada
+
+`const umaMatricula = await database.Matriculas.findOne({where: { id: Number(matriculaId), estudante_id: Number(estudanteId) },});`
+
+- Com isso, o CRUD não fica mais parado, e sim relacionado!
