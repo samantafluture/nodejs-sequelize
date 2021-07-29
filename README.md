@@ -77,5 +77,19 @@ Projeto visa construir uma API Rest com Node.js, Express, Sequelize e MySQL.
 
 ## API no ar
 
-Acesse [/pessoas](http://localhost:3000/pessoas) no seu localhost.
+### Métodos
+
+- GET
+- PUT
+- POST
+- DELETE
+
+### Rotas
+
+* Acesse via localhost:3000
+
+- [/pessoas](http://localhost:3000/pessoas)
+- [/niveis](http://localhost:3000/niveis)
+- [/turmas](http://localhost:3000/turmas)
+- [/pessoas/:id/matricula/:id](http://localhost:3000/pessoas/:id/matricula/:id)
 
