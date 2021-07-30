@@ -1,4 +1,5 @@
 const database = require("../models");
+const Sequelize = require("sequelize");
 
 class PessoaController {
   static async pegaPessoasAtivas(req, res) {
@@ -144,6 +145,7 @@ class PessoaController {
       return res.status(500).json(error.message);
     }
   }
+
   static async pegaMatriculas(req, res) {
     const { estudanteId } = req.params;
     try {
@@ -156,6 +158,7 @@ class PessoaController {
       return res.status(500).json(error.message);
     }
   }
+
   static async pegaMatriculasPorTurma(req, res) {
     const { turmaId } = req.params;
     try {
@@ -165,9 +168,29 @@ class PessoaController {
           status: "confirmado",
         },
         limit: 20,
-        order: [["estudante_id", "ASC"]]
+        order: [["estudante_id", "ASC"]],
       });
       return res.status(200).json(todasAsMatriculas);
+    } catch (error) {
+      return res.status(500).json(error.message);
+    }
+  }
+
+  static async pegaTurmasLotadas(req, res) {
+    const lotacaoTurma = 2;
+    try {
+      const turmasLotadas = await database.Matriculas.findAndCountAll({
+        where: {
+          status: "confirmado",
+        },
+        // junta os resultados checando o valor da coluna turma_id
+        attributes: ["turma_id"],
+        group: ["turma_id"],
+        // conta quantos resultados de turma_id são maiores que 2
+        // ou seja, quantas turmas tem mais de 2 alunos
+        having: Sequelize.literal(`count(turma_id) >= ${lotacaoTurma}`),
+      });
+      return res.status(200).json(turmasLotadas.count);
     } catch (error) {
       return res.status(500).json(error.message);
     }

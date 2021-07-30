@@ -413,5 +413,9 @@
 - Acima, o primeiro parâmetro diz por qual coluna quer ordenar (estudante_id)
 - E o segundo diz ordem "ascendente"
 
+## Sequelize.Literal
 
+- Pode escrever SQL dentro deste método
+- Query que filtra os dados agregados = `HAVING`
+- Query que agrupa os dados = `GROUP BY`
 
