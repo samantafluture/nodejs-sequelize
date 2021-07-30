@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       data_inicio: DataTypes.DATEONLY,
     },
-    {}
+    { paranoid: true }
   );
 
   Turmas.associate = function (models) {

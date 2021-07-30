@@ -11,6 +11,7 @@ Projeto visa construir uma API Rest com Node.js, Express, Sequelize e MySQL.
 - MySQL
 - Postman
 - Nodemon
+- ESLint
 
 ## Modelos e associações
 

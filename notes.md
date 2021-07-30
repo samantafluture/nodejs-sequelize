@@ -23,6 +23,16 @@
 
 `npm install mysql2`
 
+4. ESLint
+
+`npm install eslint --save-dev`
+
+- adicionar script packagejson -> "lint": "eslint api --fix"
+
+`./node_modules/.bin/eslint --init`
+
+- gerar arquivo de configuração
+
 ## Banco de dados
 
 ### Migração em SQL (migrations)
@@ -169,6 +179,20 @@
 `select * from Turmas;`
 `select * from Matriculas;`
 
+### Adicionando novas colunas em uma tabela
+
+- Criar via Migrations
+- E não alterar diretamente no banco
+- Desta forma fica como documentação
+- Tabela "SequelizeMeta" monitora todas as alterações no banco
+
+1. Na pasta /migrations, criar um novo arquivo com nome "data e hora de hoje" + "addcolumn-pessoas.js"
+2. Use o método "addColumn" e especifique o nome da tabela (exemplo: "deletedAt")
+3. Rodar `npx sequelize-cli db:migrate` no terminal para fazer as migrações
+
+- Sempre que deletar um registro, irá acrescentar a data do ato de deletar na coluna "deletedAt"
+- Assim, quando for fazer um get nestes registros, a query vai pegar todos os registros que tem "NULL" na coluna "deletedAt", ou seja, que ainda não foram deletados
+
 ## Padrão MVC
 
 - Como ligar o modelo ao restante da aplicação?
@@ -293,3 +317,17 @@
 `const umaMatricula = await database.Matriculas.findOne({where: { id: Number(matriculaId), estudante_id: Number(estudanteId) },});`
 
 - Com isso, o CRUD não fica mais parado, e sim relacionado!
+
+## Soft Delete
+
+- Exlusão suave via Sequelize chama "Paranoid"
+- Acrescentar nos modelos a opção `paranoid: true` dentro do objeto vazio
+- Dessa forma, os registros não vão ser apagados de forma permanente
+- Na query, vai ser feito um "update" via Sequelize, adicionando timestamp numa colunca "delectAt"
+- Temos que criar esta coluna para implementar o Paranoid
+- Podemos restaurar um registro caso a gente precise, usando o controlador, criando um método que o usa restore do Sequelize
+
+
+
+
+

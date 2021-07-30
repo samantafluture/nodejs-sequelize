@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       descr_nivel: DataTypes.STRING,
     },
-    {}
+    { paranoid: true }
   );
 
   Niveis.associate = function (models) {
