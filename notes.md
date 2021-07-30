@@ -318,7 +318,7 @@
 
 - Com isso, o CRUD não fica mais parado, e sim relacionado!
 
-## Soft Delete
+### Soft Delete
 
 - Exlusão suave via Sequelize chama "Paranoid"
 - Acrescentar nos modelos a opção `paranoid: true` dentro do objeto vazio
@@ -326,6 +326,24 @@
 - Na query, vai ser feito um "update" via Sequelize, adicionando timestamp numa colunca "delectAt"
 - Temos que criar esta coluna para implementar o Paranoid
 - Podemos restaurar um registro caso a gente precise, usando o controlador, criando um método que o usa restore do Sequelize
+
+## Escopos
+
+- Escopos definem funcionalidades e funções
+- Como se fosse um filtro
+- No Sequelize, o escopo padrão define quais restrições e definições serão utilizadas na query por padrão
+- Sequelize usa defaultScope e deve ser incluso dentro dos atributos no modelo, abaixo do paranoid: true
+- Neste projeto, queremos que, ao fazer um GET, só aparecem as pessoas com a chave "ativo" de valor "true"
+- Por padrão, ao incluir isso, o sequelize vai incluir este novo atributo em todas as querys feitas pelo Sequelize neste modelo
+- O escopo padrão pode ser sobrescrito / revertido
+- Para adicionar outros registros, passamos o nome dele como parâmetro do método `.scope("todos)` por exemplo
+- Assim temos dois métodos GET que pegam pessoas:
+    - o padrão é pegar todos os ativos apenas
+    - o outro é, usando o escopo "todos", pegar todas as pessoas, incluindo as não ativas
+
+## Validação de dados
+
+
 
 
 
