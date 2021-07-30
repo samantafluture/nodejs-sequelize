@@ -1,14 +1,35 @@
 const database = require("../models");
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
 class TurmaController {
   static async pegaTodasAsTurmas(req, res) {
+    const { data_inicial, data_final } = req.query;
+    const where = {};
+
+    // verifico se tem um dos dois, se tiver crio propriedade "data_inicio" (que é o nome da coluna)
+    data_inicial || data_final ? where.data_inicio = {} : null;
+    
+    // se existir, vai dentro do ob where, dentro de data_inicio, passa uma nova propriedade [], que tem por valor o parâmetro data_inicial ou final (no outro)
+    data_inicial ? where.data_inicio[Op.gte] = data_inicial : null;
+    data_final ? where.data_inicio[Op.lte] = data_final : null;
+
     try {
-      const todasAsTurmas = await database.Turmas.findAll();
+      const todasAsTurmas = await database.Turmas.findAll({ where });
       return res.status(200).json(todasAsTurmas);
     } catch (error) {
       return res.status(500).json(error.message);
     }
   }
+
+  // {
+  //   where: {
+  //     data_inicio: {
+  //       [Op.gte]: data,
+  //       [Op.lte]: data
+  //     }
+  //   }
+  // }
 
   static async pegaUmaTurma(req, res) {
     const { id } = req.params;

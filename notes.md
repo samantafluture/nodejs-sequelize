@@ -378,5 +378,22 @@
 - Usar os métodos de validação do Sequelize
 - Também é possível fazer validações customizadas, criando uma função validadora
 
+## Parâmetros de query
+
+- Uma forma de filtrar
+- Forma de passar infos de forma mais supérfula
+- Vamos usar para filtrar registros em um determinado intervalo de datas
+- "Query strings" -> `req.query`
+- No próprio endpoint
+- Começa com um ? e vai concatenando os parâmetros que quiser (com &)
+- Para isso, usar operadores (palavras reservados do Sequelize) que verificam condições
+
+`[Op.gte]`= greater or equal then
+`[Op.lte]` = lower or equal then
+
+- Exemplo: http://localhost:3000/turmas?data_inicial=2021-01-01&data_final=2021-12-31
+- Traz todas as matrículas criadas entre 01/01/21 a 31/12/21
+
+
 
 
