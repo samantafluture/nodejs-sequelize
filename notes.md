@@ -327,7 +327,7 @@
 - Temos que criar esta coluna para implementar o Paranoid
 - Podemos restaurar um registro caso a gente precise, usando o controlador, criando um método que o usa restore do Sequelize
 
-## Escopos
+## Escopo de modelo
 
 - Escopos definem funcionalidades e funções
 - Como se fosse um filtro
@@ -341,11 +341,42 @@
     - o padrão é pegar todos os ativos apenas
     - o outro é, usando o escopo "todos", pegar todas as pessoas, incluindo as não ativas
 
+## Escopo de associações
+
+- Similar ao espoco de modelo
+- É definindo onde declaramos as associações do modelo
+- Adiciona abaixo da chave-estrangeira um escopo de associação passando duas informações:
+    - o escopo em si, ou seja, aquilo que quer usar como filtro, que será uma condição que o Sequelize passa ao SQL quando for montar a query ("where...")
+    - o nome que dá ao escopo, para chamar os métodos automáticos que o Sequelize tem (os mixins)
+
+- No modelo pessoas, acrescentar:
+
+`scope: { status: "confirmado" }, as: "aulasMatriculadas"`
+
+- Isso filtra como escopo as matrículas com status confirmado
+- E dá o nome para o escopo de "aulasMatriculadas"
+
+- No controller, criar método "pegaMatriculas"
+- Usar o método "getAulasMatriculadas", criado automaticamente pelo Sequelize, a partir do escopo criado anteriomente
+
+- Na rota, criar rota com /pessoas/estudanteId/matricula para puxar a matrícula específica de determinado aluno
+
+- Se eu retirar o scope "confirmado", então o método o controler "pegaMatriculas" vai trazer todas as matrículas do aluno, tanto confirmadas quanto canceladas
+- Já com este escopo incluso, ele traz apenas as confirmadas
+
+### Mixins
+
+- Classes que contém métodos que podem ser utilizados por outras classes, sem a necessidade de herança direta
+- Eles carregam certo comportamento e pode adicionar este comportamento a outras classes
+- Os escopos de associação são uma regra ou conjunto de atributos automaticamente aplicados em instâncias do modelo
+- Na query, ele aplicada a palavra-chave `WHERE`
+- Métodos que existem somente nas instâncias dos modelos
+
 ## Validação de dados
 
-
-
-
+- Validação é passada dentro do modelo em questão, em seu atributo
+- Usar os métodos de validação do Sequelize
+- Também é possível fazer validações customizadas, criando uma função validadora
 
 
 
