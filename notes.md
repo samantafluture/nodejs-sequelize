@@ -394,6 +394,24 @@
 - Exemplo: http://localhost:3000/turmas?data_inicial=2021-01-01&data_final=2021-12-31
 - Traz todas as matrículas criadas entre 01/01/21 a 31/12/21
 
+## Filtras dados
+
+- Usar o método do sequelize FindAndCountall()
+- É um método de tipo "finder"
+- Passar os atributos "where" que quer filtrar
+    - Por exemplo, aqui, vamos filtrar por tuma (turma_id) e por matrículas de status confirmado (status: "confirmado")
+
+### Paginação com "limit"
+
+- Também é possível adicionar limitação `limit` => para fazer paginação
+- Regula a quantidade de registros que é trazida por vez pelo banco
+
+### Ordenação com "order"
+
+- Ordenar os resultados que são trazidos
+- Exemplo: `order: [["estudante_id", "ASC"]]`
+- Acima, o primeiro parâmetro diz por qual coluna quer ordenar (estudante_id)
+- E o segundo diz ordem "ascendente"
 
 
 
