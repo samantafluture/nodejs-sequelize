@@ -193,6 +193,18 @@
 - Sempre que deletar um registro, irá acrescentar a data do ato de deletar na coluna "deletedAt"
 - Assim, quando for fazer um get nestes registros, a query vai pegar todos os registros que tem "NULL" na coluna "deletedAt", ou seja, que ainda não foram deletados
 
+### Sequelize.Literal
+
+- Pode escrever SQL dentro deste método
+- Query que filtra os dados agregados = `HAVING`
+- Query que agrupa os dados = `GROUP BY`
+
+### Transações
+
+- Método transaction() que recebe como parâmetro um callback
+- Dentro dele, fazemos operações de bancos que queremos que seja gerenciada pela transação
+- Para evitar qualquer erro ou falha no banco (que pode acasionar perde de alterações)
+
 ## Padrão MVC
 
 - Como ligar o modelo ao restante da aplicação?
@@ -413,15 +425,15 @@
 - Acima, o primeiro parâmetro diz por qual coluna quer ordenar (estudante_id)
 - E o segundo diz ordem "ascendente"
 
-## Sequelize.Literal
+## Serviços
 
-- Pode escrever SQL dentro deste método
-- Query que filtra os dados agregados = `HAVING`
-- Query que agrupa os dados = `GROUP BY`
-
-## Transações
-
-- Método transaction() que recebe como parâmetro um callback
-- Dentro dele, fazemos operações de bancos que queremos que seja gerenciada pela transação
-- Para evitar qualquer erro ou falha no banco (que pode acasionar perde de alterações)
-
+ - Camada extra na aplicação chamada /servicos
+ - Conectar com a database e processar os dados
+ - Vai tirar isso do controlador 
+ - É uma camada que fica entre o controlador e o modelo
+ - Faz a interface com o modelo
+ - Se conecta com o banco de dados e processa os dados
+ - Enquanto isso, ons controladores cuidam de receber as requisições http
+ - Envia para o serviço e retorna a resposta do serviço
+ - Após a separação, a responsabilidade do serviço é se conectar aos modelos através dos métodos de query do Sequelize
+ - Já os controladores recebem as chamadas das rotas, passam para os serviços as informações necessárias e fazem os tratamentos de dados nos retorno
