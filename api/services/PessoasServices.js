@@ -8,7 +8,6 @@ class PessoasServices extends Services {
   }
 
   async pegaRegistrosAtivos(where = {}) {
-    // funciona tanto se where não tiver nada como com parâmetros
     return database[this.nomeDoModelo].findAll({ where: { ...where } });
   }
 
@@ -18,19 +17,24 @@ class PessoasServices extends Services {
       .findAll({ where: { ...where } });
   }
 
-  async cancelaPessoasEMatriculas(estudanteId) {
+  async cancelaPessoaEMatriculas(estudanteId) {
     return database.sequelize.transaction(async (transacao) => {
-      await super.atualizaRegistro(
-        { ativo: false }, 
-        estudanteId, 
-        { transaction: transacao }
-      );
-      await super.atualizaRegistros(
+      await super.atualizaRegistro({ ativo: false }, estudanteId, {
+        transaction: transacao,
+      });
+      await this.matriculas.atualizaRegistros(
         { status: "cancelado" },
         { estudante_id: estudanteId },
         { transaction: transacao }
       );
     });
+  }
+
+  async pegaMatriculasPorEstudante(where = {}) {
+    const matriculas = await database[this.nomeDoModelo].findOne({
+      where: { ...where },
+    });
+    return matriculas.getAulasMatriculadas();
   }
 }
 
