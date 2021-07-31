@@ -15,7 +15,7 @@ Projeto visa construir uma API Rest com Node.js, Express, Sequelize e MySQL.
 
 ## Modelos e associações
 
-![Diagrama das tabelas da API](https://github.com/samantafluture/nodejs-sequelize/blob/main/diagrama.png?raw=true)
+![Diagrama das tabelas da API](https://github.com/samantafluture/nodejs-sequelize/blob/refactoring/public/diagrama.png?raw=true)
 
 ## O que instalar?
 
@@ -93,10 +93,16 @@ Foram criados os seguintes métodos HTTP para cada modelo.
 
 ### Rotas
 
+![Json com registros da API](https://github.com/samantafluture/nodejs-sequelize/blob/refactoring/public/json.png?raw=true)
+
 Acesse via localhost:3000 as rotas de base abaixo.
 
 - [/pessoas](http://localhost:3000/pessoas)
 - [/niveis](http://localhost:3000/niveis)
 - [/turmas](http://localhost:3000/turmas)
+
+### Em Construção
+
+- [x] Melhorar validações e acrescentar novas
 
 
