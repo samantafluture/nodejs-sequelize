@@ -8,6 +8,7 @@ router.get("/pessoas/todos", PessoaController.pegaTodasAsPessoas);
 router.get("/pessoas/:id", PessoaController.pegaUmaPessoa);
 router.post("/pessoas", PessoaController.criaPessoa);
 router.post("/pessoas/:id/restaura", PessoaController.restauraPessoa);
+router.post("/pessoas/:estudanteId/cancela", PessoaController.cancelaPessoa);
 router.put("/pessoas/:id", PessoaController.atualizePessoa);
 router.delete("/pessoas/:id", PessoaController.apagaPessoa);
 
@@ -22,6 +23,10 @@ router.get(
 );
 router.get("/pessoas/matricula/lotada", PessoaController.pegaTurmasLotadas);
 router.post("/pessoas/:estudanteId/matricula", PessoaController.criaMatricula);
+router.post(
+  "/pessoas/:estudanteId/matricula/:matriculaId/restaura",
+  PessoaController.restauraMatricula
+);
 router.put(
   "/pessoas/:estudanteId/matricula/:matriculaId",
   PessoaController.atualizaMatricula
@@ -30,9 +35,6 @@ router.delete(
   "/pessoas/:estudanteId/matricula/:matriculaId",
   PessoaController.apagaMatricula
 );
-router.post(
-  "/pessoas/:estudanteId/matricula/:matriculaId/restaura",
-  PessoaController.restauraMatricula
-);
+
 
 module.exports = router;

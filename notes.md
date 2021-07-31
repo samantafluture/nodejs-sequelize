@@ -419,3 +419,9 @@
 - Query que filtra os dados agregados = `HAVING`
 - Query que agrupa os dados = `GROUP BY`
 
+## Transações
+
+- Método transaction() que recebe como parâmetro um callback
+- Dentro dele, fazemos operações de bancos que queremos que seja gerenciada pela transação
+- Para evitar qualquer erro ou falha no banco (que pode acasionar perde de alterações)
+
