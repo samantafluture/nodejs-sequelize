@@ -104,6 +104,6 @@ Acesse via localhost:3000 as rotas de base abaixo.
 ### Em Construção
 
 - [x] Usar sequelize.transaction() para transações de bancos de dados
-- [] Melhorar validações e acrescentar novas
+- [ ] Melhorar validações e acrescentar novas
 
 
